@@ -7,7 +7,7 @@ api = Api(app)
 
 parser = reqparse.RequestParser()
 parser.add_argument('director')
-parser.add_argument('genre')
+parser.add_argument('genre', type=str, action='append')
 parser.add_argument('sort_by', default='popularity')
 parser.add_argument('order', default='desc')
 
@@ -20,7 +20,9 @@ class SearchResource(Resource):
             cursor = connection.cursor() 
 
             # Base query
-            query = "SELECT * FROM Movies WHERE "
+            query = """SELECT * FROM MOVIES JOIN MOVIES_GENRE ON MOVIES.id = MOVIES_GENRE.movie_id JOIN GENRE ON MOVIES_GENRE.genre_id = GENRE.id JOIN Director ON MOVIES.director = Director.id JOIN IMDB_SCORE ON MOVIES.imdb_score = IMDB_SCORE.id JOIN POPULARITY ON MOVIES.popularity = POPULARITY.id"""
+            
+            
             values = []
             # Parameters for filtering and sorting
             filters = []
@@ -39,17 +41,19 @@ class SearchResource(Resource):
 
             if args['genre']:
                 print(args['genre'])
-                cursor.execute("SELECT * FROM GENRE WHERE genre LIKE ?", ("%" + args['genre'] + "%",))
-                matching_query = cursor.fetchone()
-                print(matching_query)
-                values.append(matching_query[0])
-                filters.append(f"AND EXISTS (SELECT * FROM MOVIES_GENRE WHERE MOVIES_GENRE.movie_id = MOVIES.id AND MOVIES_GENRE.genre_id = (?))")
+                print(type(args['genre']))
+                genre_condition = " OR ".join(["GENRE.genre LIKE ?" for _ in args['genre']])
+                filters.append(f"({genre_condition})")
+                for item in args['genre']:
+                    values.append("%" + item + "%")
 
             print(query)
 
             # Apply filters to the query
             if filters:
-                query += " AND ".join(filters)
+                query += " WHERE " + " AND ".join(filters)
+            else:
+                query += " WHERE 1"
 
             print(query)
 
@@ -57,11 +61,10 @@ class SearchResource(Resource):
             if sort_by in ('popularity', 'imdb_score'):
                 query += f" ORDER BY {sort_by} {order}"
 
-            print(query, values)
-
-            cursor.execute(query, values)
+            print(query)
+            cursor.execute(query)
             movies = cursor.fetchall()
-
+            
             # Close the database connection
             connection.close()
 
@@ -75,9 +78,10 @@ class SearchResource(Resource):
                         {
                             "id": item[0],
                             "name": item[1],
-                            "imdb_score": item[2],
-                            "director": item[3],
-                            "popularity": item[4]
+                            "imdb_score": item[12],
+                            "director": item[10],
+                            "popularity": item[14],
+                            "genre": item[8]
                         }
                     )
 
