@@ -40,3 +40,5 @@ python -m pip install -r requirements.txt
 flask run
 ```
 The application will be accessible at http://127.0.0.1:5000.
+
+## Scalablity Challenges
