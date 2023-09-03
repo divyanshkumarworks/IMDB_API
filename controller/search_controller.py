@@ -10,6 +10,8 @@ parser.add_argument('director')
 parser.add_argument('genre', type=str, action='append')
 parser.add_argument('sort_by', default='popularity')
 parser.add_argument('order', default='desc')
+parser.add_argument('name', type=str)
+parser.add_argument('popularity')
 
 class SearchResource(Resource):
     def get(self):
@@ -30,6 +32,13 @@ class SearchResource(Resource):
             order = args['order']
 
             # Filtering logic
+            if args['name']:
+                print(args['name'])
+                movie = args['name']
+                filters.append(f"MOVIES.name LIKE ?")
+                values.append("%" + movie + "%")
+
+            print(query)
             if args['director']:
                 director = args['director']
                 filters.append(f"director = ?")
@@ -62,7 +71,7 @@ class SearchResource(Resource):
                 query += f" ORDER BY {sort_by} {order}"
 
             print(query)
-            cursor.execute(query)
+            cursor.execute(query, values)
             movies = cursor.fetchall()
             
             # Close the database connection
