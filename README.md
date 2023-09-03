@@ -39,4 +39,4 @@ python -m pip install -r requirements.txt
 ```bash
 flask run
 ```
-The application will be accessible at http://localhost:5000.
+The application will be accessible at http://127.0.0.1:5000.
