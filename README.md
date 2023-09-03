@@ -41,4 +41,12 @@ flask run
 ```
 The application will be accessible at http://127.0.0.1:5000.
 
+## API Endpoints
+
+The following API endpoints are available:
+
+1. `POST /movies` Create a new movie. (Request body should contain the resource data in JSON format.)
+2. `DELETE /movies/<id>` Delete a movie with the specified ID.
+3. `PUT /movies/<id>` Update an existing movie identified by its ID. (Request body should contain the updated resource data in JSON format.)
+4. `GET /movies/search` Search for existing movies using various filters.
 ## Scalablity Challenges
