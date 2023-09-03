@@ -16,11 +16,11 @@ Follow these instructions to get a copy of the project up and running on your lo
 ### Installation
 1. Clone this repository
  ```bash
- https://github.com/divyanshkumarworks/Flask-Application.git
+ https://github.com/divyanshkumarworks/IMDB_API.git
  ```
 2. go inside clone folder
  ```bash
- cd Flask-Application
+ cd IMDB_API
 ```
 3. Create a Virtual Environment
  ```bash
@@ -35,8 +35,8 @@ Follow these instructions to get a copy of the project up and running on your lo
 python -m pip install -r requirements.txt
 ```
 
-6. Run the Flask application.
+6. Run the Flask app.
 ```bash
-python app.py
+flask run
 ```
 The application will be accessible at http://localhost:5000.
