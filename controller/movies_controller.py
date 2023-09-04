@@ -84,7 +84,7 @@ class MoviesResource(Resource):
     def delete(self, movie_id):
         try:
             # user_parser.add_argument("name", type=str, required=True, help="Name is required.")
-
+            print(movie_id)
             connection = sqlite3.connect('database.db')
             cursor = connection.cursor()
             # data = user_parser.parse_args()
@@ -94,11 +94,12 @@ class MoviesResource(Resource):
 
             cursor.execute("DELETE FROM MOVIES WHERE id = ?", (movie_id,))
 
+            connection.commit()
+            connection.close()
+            
             return {'message': 'moive deleted successfully'}, 200
         except Exception as error:
             return {'message': error}
-
-class MovieResource(Resource):
 
     @jwt_token_required
     def post(self):
@@ -156,6 +157,4 @@ class MovieResource(Resource):
         connection.commit()
         connection.close()
 
-
 api.add_resource(MoviesResource, "/movies/<movie_id>")
-api.add_resource(MovieResource, "/movie")
