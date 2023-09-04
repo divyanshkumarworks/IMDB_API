@@ -27,7 +27,7 @@ class MoviesResource(Resource):
         existing_data = cursor.fetchone()
 
         if existing_data is None:
-            return jsonify({"message": "Movie not found"}), 404
+            return {"message": "Movie not found"}, 404
 
         name = data['name'] if data['name'] else existing_data[1]
         imdb_score = data['imdb_score'] if data['imdb_score'] else existing_data[2]
@@ -83,20 +83,15 @@ class MoviesResource(Resource):
     @jwt_token_required
     def delete(self, movie_id):
         try:
-            # user_parser.add_argument("name", type=str, required=True, help="Name is required.")
             print(movie_id)
             connection = sqlite3.connect('database.db')
             cursor = connection.cursor()
-            # data = user_parser.parse_args()
-
-            # movie_name = data['name']
-            # movie_name = movie_name.capitalize()
 
             cursor.execute("DELETE FROM MOVIES WHERE id = ?", (movie_id,))
 
             connection.commit()
             connection.close()
-            
+
             return {'message': 'moive deleted successfully'}, 200
         except Exception as error:
             return {'message': error}
