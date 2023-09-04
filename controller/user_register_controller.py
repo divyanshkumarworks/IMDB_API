@@ -34,6 +34,6 @@ class UserResrource(Resource):
 
 		return {'message': "user created successfully"}, 200
 
-api.add_resource(UserResrource, '/user')
+api.add_resource(UserResrource, '/user/register')
 
 

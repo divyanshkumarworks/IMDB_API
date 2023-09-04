@@ -33,4 +33,4 @@ class AuthenticateResource(Resource):
 		except Exception as error:
 			return {"mesage": error}
 
-api.add_resource(AuthenticateResource, '/authenticate/user')
+api.add_resource(AuthenticateResource, '/user/authenticate')
