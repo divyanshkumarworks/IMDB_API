@@ -11,7 +11,6 @@ parser.add_argument('genre', type=str, action='append')
 parser.add_argument('sort_by', default='popularity')
 parser.add_argument('order', default='desc')
 parser.add_argument('name', type=str)
-parser.add_argument('popularity')
 
 class SearchResource(Resource):
     def get(self):
@@ -28,6 +27,8 @@ class SearchResource(Resource):
             filters = []
             sort_by = args['sort_by']
             order = args['order']
+
+
 
             if args['name']:
                 print(args['name'])
@@ -61,15 +62,21 @@ class SearchResource(Resource):
                 query += " WHERE 1"
 
             print(query)
+            print(sort_by)
 
-            if sort_by in ('popularity', 'imdb_score'):
-                query += f" ORDER BY {sort_by} {order}"
+            if sort_by == "popularity":
+                query += f" ORDER BY POPULARITY.{sort_by} {order.upper()}"
+
+            if sort_by == "imdb_score":
+                query += f" ORDER BY IMDB_SCORE.score {order.upper()}"
+            
+            if sort_by == "id":
+                query += f" ORDER BY MOVIES.{sort_by} {order.upper()}"
 
             print(query)
             cursor.execute(query, values)
             movies = cursor.fetchall()
             
-            connection.commit()
             connection.close()
 
             data = {
@@ -77,7 +84,6 @@ class SearchResource(Resource):
             }
 
             for item in movies:
-                print(item)
                 data["movies"].append(
                         {
                             "id": item[0],

@@ -11,14 +11,9 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-# Specify the Flask environment port
-ENV PORT 5000
 
 # By default, listen on port 5000
 EXPOSE 5000
 
-# Set the directive to specify the executable that will run when the container is initiated
-ENTRYPOINT [ "python" ]
-
 # Specify the command to run on container start
-CMD [ "app.py" ]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
