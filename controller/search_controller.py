@@ -21,17 +21,14 @@ class SearchResource(Resource):
             connection = sqlite3.connect('database.db')
             cursor = connection.cursor() 
 
-            # Base query
             query = """SELECT * FROM MOVIES JOIN MOVIES_GENRE ON MOVIES.id = MOVIES_GENRE.movie_id JOIN GENRE ON MOVIES_GENRE.genre_id = GENRE.id JOIN Director ON MOVIES.director = Director.id JOIN IMDB_SCORE ON MOVIES.imdb_score = IMDB_SCORE.id JOIN POPULARITY ON MOVIES.popularity = POPULARITY.id"""
             
             
             values = []
-            # Parameters for filtering and sorting
             filters = []
             sort_by = args['sort_by']
             order = args['order']
 
-            # Filtering logic
             if args['name']:
                 print(args['name'])
                 movie = args['name']
@@ -58,7 +55,6 @@ class SearchResource(Resource):
 
             print(query)
 
-            # Apply filters to the query
             if filters:
                 query += " WHERE " + " AND ".join(filters)
             else:
@@ -66,7 +62,6 @@ class SearchResource(Resource):
 
             print(query)
 
-            # Sorting logic
             if sort_by in ('popularity', 'imdb_score'):
                 query += f" ORDER BY {sort_by} {order}"
 
@@ -74,7 +69,7 @@ class SearchResource(Resource):
             cursor.execute(query, values)
             movies = cursor.fetchall()
             
-            # Close the database connection
+            connection.commit()
             connection.close()
 
             data = {
