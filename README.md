@@ -123,7 +123,7 @@ http://127.0.0.1:5000/movies/search?order=asc
 ## Bottlenecks and Solutions
 **1. Load Balancing**
 
-Overload can occur in certain conditions like a sudden spike in network traffic, resource exhaustion, and poorly optimized code that exceeds server capacity to handle workoad effectively. This leads to performance degradation, reduced responsiveness, and, in extreme cases, system failure. To decrease workload, vertical scaling can be done but there is limit to it, So, the most relevant solution to this problem is Load Balancing.
+Overload can occur in certain conditions like a sudden spike in network traffic, resource exhaustion, and poorly optimized code that exceeds server capacity to handle workload effectively. This leads to performance degradation, reduced responsiveness, and, in extreme cases, system failure. To decrease workload, vertical scaling can be done but there is a limit to it, So, the most relevant solution to this problem is Load Balancing.
 
 through **Load Balancing**, we can distribute incoming network traffic or workloads across multiple servers or resources to ensure efficient resource utilization, high availability, and improved performance. They are typically placed in front of a cluster of servers or resources and continuously monitor the health of servers and route traffic away from failed or unhealthy servers to maintain system reliability.
 
@@ -133,8 +133,17 @@ Sometimes database takes a significant amount of time to fetch and return result
 
 **Caching**
 
-Implementing caching mechanisms to store and reuse the results of frequently executed complex queries reduces the load on the database and speeds up data retrieval for subsequent requests. **Redis** maybe the solution for this, As **Redis** can be used as a cache for frequently accessed or computationally expensive query results. It stores the results in memory, allowing for lightning-fast retrieval. Complex queries can be executed once, and subsequent requests can be served directly from Redis cache.
+Implementing caching mechanisms to store and reuse the results of frequently executed complex queries reduces the load on the database and speeds up data retrieval for subsequent requests. **Redis** may be the solution for this, As **Redis** can be used as a cache for frequently accessed or computationally expensive query results. It stores the results in memory, allowing for lightning-fast retrieval. Complex queries can be executed once, and subsequent requests can be served directly from the Redis cache.
 
 **Database Sharding**
 
-we can horizontally partition a large database into smaller, more manageable pieces called shards. Each shard contains a subset of the data, and together, they make up the complete dataset. It is primarily employed to improve scalability, performance, and availability in large-scale, high-volume applications. There are various ways to shard datas, for example we can data based on genres. we can create separate shards for popular genres like Action, Drama, Comedy, etc. this allows for better distribution of data and optimized queries when users search for movies by genre.
+we can horizontally partition a large database into smaller, more manageable pieces called shards. Each shard contains a subset of the data, and together, they make up the complete dataset. It is primarily employed to improve scalability, performance, and availability in large-scale, high-volume applications. There are various ways to shard data, for example, we can data based on genres. we can create separate shards for popular genres like Action, Drama, Comedy, etc. This allows for better distribution of data and optimized queries when users search for movies by genre.
+
+**Indexing**
+
+We can use indexing in a database to improve the speed of data retrieval operations on specific columns or fields. Indexing can significantly enhance query performance. For example, Create an index on the "title" column of the movie database table. This index allows for fast retrieval of movies by their titles.
+
+CREATE INDEX idx_title ON MOVIES(name);
+
+But, it's really important to strike a balance between indexing and database maintenance, as excessive indexing can slow down insert and update operations. So, one needs to regularly monitor and optimize indexes as data grows and access patterns evolve.
+
