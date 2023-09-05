@@ -18,7 +18,7 @@ Follow these instructions to get a copy of the project up and running on your lo
  ```bash
  https://github.com/divyanshkumarworks/IMDB_API.git
  ```
-2. go inside clone folder
+2. Go inside the clone folder
  ```bash
  cd IMDB_API
 ```
@@ -45,7 +45,7 @@ The application will be accessible at http://127.0.0.1:5000.
 
 The following API endpoints are available:
 
-1. `POST /user/register` for signUp or creating a new user. (Request body should contain the resource data in JSON format.)
+1. `POST /user/register` for signUp or creating a new user. (The request body should contain the resource data in JSON format.)
 ```bash
 {
    "name": "XYZ",
@@ -53,14 +53,14 @@ The following API endpoints are available:
    "role": Admin/User
 }
 ```
-2. `POST /user/authenticate` for Authenticating whether user exists or is admin or not. (Request body should contain the resource data in JSON format.)
+2. `POST /user/authenticate` for authentication whether the user exists or is admin or not. (The request body should contain the resource data in JSON format.)
 ```bash
 {
    "name": "XYZ",
    "password: 123,
 }
 ```
-3. `POST /movies` Stores a new movie. (Request body should contain the resource data in JSON format.)
+3. `POST /movies` Stores a new movie. (The request body should contain the resource data in JSON format.)
 ```bash
 resource required for creating new movie data
 {
@@ -75,7 +75,7 @@ resource required for creating new movie data
 ```bash
 Ex:- http://127.0.0.1:5000/movies/1 will delete the existing movie for the table with ID 1.
 ```
-5. `PUT /movies/<id>` Update an existing movie identified by its ID. (Request body should contain the updated resource data in JSON format.)
+5. `PUT /movies/<id>` Update an existing movie identified by its ID. (The request body should contain the updated resource data in JSON format.)
 ```bash
 resource required for creating new movie data
 {
@@ -86,7 +86,7 @@ resource required for creating new movie data
     "director": ""
 }
 ```
-Note:- user can provide or update any of the above data to change otherwise it adds the existing data to the table
+Note:- The user can provide or update any of the above data to change otherwise it adds the existing data to the table
 
 6. `GET /movies/search/...` Search for existing movies using various filters.
 
@@ -98,7 +98,7 @@ http://127.0.0.1:5000/movies/search
 }
 ```
 
-**Getting movies by director**
+**Getting movies by a director**
 ```bash
 http://127.0.0.1:5000/movies/search?director=XYZ
 ```
@@ -109,7 +109,7 @@ http://127.0.0.1:5000/movies/search?genre=XYZ&genre=ABC
 ```
 
 **Getting movies by sort**
-By default the movies are sorted by popularity but user can sorted with imdb_score and id.
+By default, the movies are sorted by popularity but the user can sort them with imdb_score and id.
 ```bash
 http://127.0.0.1:5000/movies/search?sort_by=id
 ```
@@ -118,5 +118,23 @@ http://127.0.0.1:5000/movies/search?sort_by=id
 ```bash
 http://127.0.0.1:5000/movies/search?order=asc
 ```
-**Note**: user can combine these filters to generate customize advance search query
-## Scalablity Challenges
+**Note**: The user can combine these filters to generate a customized advanced search query
+
+## Bottlenecks and Solutions
+**1. Load Balancing**
+
+Overload can occur in certain conditions like a sudden spike in network traffic, resource exhaustion, and poorly optimized code that exceeds server capacity to handle workoad effectively. This leads to performance degradation, reduced responsiveness, and, in extreme cases, system failure. To decrease workload, vertical scaling can be done but there is limit to it, So, the most relevant solution to this problem is Load Balancing.
+
+through **Load Balancing**, we can distribute incoming network traffic or workloads across multiple servers or resources to ensure efficient resource utilization, high availability, and improved performance. They are typically placed in front of a cluster of servers or resources and continuously monitor the health of servers and route traffic away from failed or unhealthy servers to maintain system reliability.
+
+**2. Complex Queries**
+
+Sometimes database takes a significant amount of time to fetch and return results for queries that involve multiple criteria, joins, or complex calculations. This can happen for various reasons, such as inefficient indexing, large datasets, complex data models, or a lack of optimization. Slow data retrieval can lead to poor application performance and a frustrating user experience. Following are some of the solutions to Speed up data retrieval on complete queries:
+
+**Caching**
+
+Implementing caching mechanisms to store and reuse the results of frequently executed complex queries reduces the load on the database and speeds up data retrieval for subsequent requests. **Redis** maybe the solution for this, As **Redis** can be used as a cache for frequently accessed or computationally expensive query results. It stores the results in memory, allowing for lightning-fast retrieval. Complex queries can be executed once, and subsequent requests can be served directly from Redis cache.
+
+**Database Sharding**
+
+we can horizontally partition a large database into smaller, more manageable pieces called shards. Each shard contains a subset of the data, and together, they make up the complete dataset. It is primarily employed to improve scalability, performance, and availability in large-scale, high-volume applications. There are various ways to shard datas, for example we can data based on genres. we can create separate shards for popular genres like Action, Drama, Comedy, etc. this allows for better distribution of data and optimized queries when users search for movies by genre.
