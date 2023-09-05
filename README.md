@@ -1,9 +1,33 @@
 # IMDB_API
 
-Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+## About 
+
+### Introduction
+The IMDb-like system is a web-based platform that provides users with access to a database of movies and related information. It allows users to browse, search for, and interact with movie data. This documentation provides an overview of the system's architecture, features, and API endpoints.
+
+The backend consists of a Flask-based RESTful API, SQLite database for data storage, and various components for authentication, authorization, and search functionality.
+
+## Features 
+
+### User Features
+**User Authentication:**
+
+Users can register and log in.
+
+**1. Movie Listings:**
+
+Users can view a list of movies and TV shows, including details such as title, director, genre, IMDb score, and popularity.
+
+**2. Search Functionality:**
+
+Robust search functionality allows users to find movies based on various criteria, including title, director, genre, and actors.
+
+### Admin Features
+**1. Movie Management:**
+
+Admins can perform CRUD (Create, Read, Update, Delete) operations on movie entries, including adding, editing, and removing movies.
 
 ## Getting Started: 🚀
-
 ### Prerequisites 📋
 Before running the application, ensure you have the following installed:
 
