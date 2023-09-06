@@ -27,6 +27,27 @@ Robust search functionality allows users to find movies based on various criteri
 
 Admins can perform CRUD (Create, Read, Update, Delete) operations on movie entries, including adding, editing, and removing movies.
 
+## DB Design
+
+### Movies Table
+![Movies](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/973dfe9d-31b1-49b8-b021-f34602f337fc)
+
+### Popularity Table
+![Popularity](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/39bbf0f1-9511-4dda-b2f1-f958653b7b8a)
+
+### Genre Table
+![GenrePNG](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/fa5813e3-e574-4bfc-84eb-92769ac8d21e)
+
+### IMDB_score Table
+![IMDB_score](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/3c834375-4bde-4274-86a2-862ce5a5a78a)
+
+### Diretor Table
+![Director](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/0564aed4-ffb5-469d-b096-37be9b87d84e)
+
+### Movie_Genre Table
+![Movie_genre](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/088e8b14-d49e-439a-adb5-9f3e9e6a159c)
+
+
 ## Getting Started: 🚀
 ### Prerequisites 📋
 Before running the application, ensure you have the following installed:
