@@ -30,6 +30,8 @@ Admins can perform CRUD (Create, Read, Update, Delete) operations on movie entri
 ## DB Design
 
 ### Movies Table
+Normalized Movies Table to remove data duplication. Created separate one to many realtionship with Director, Popularity, Genre, and IMDB_score and added the ID's of these tables in Movies Table.  
+
 ![Movies](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/973dfe9d-31b1-49b8-b021-f34602f337fc)
 
 ### Popularity Table
@@ -44,8 +46,14 @@ Admins can perform CRUD (Create, Read, Update, Delete) operations on movie entri
 ### Director Table
 ![Director](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/0564aed4-ffb5-469d-b096-37be9b87d84e)
 
+Storing genre information directly in the movies table was causing data duplication and inefficiency.To resolve this issue, created Many to Many relationship with movies and genre and mapped their id's to respective table id's. 
 ### Movie_Genre Table
 ![Movie_genre](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/088e8b14-d49e-439a-adb5-9f3e9e6a159c)
+
+### User Table
+Created User Table and added Role Field to check whether user is admin or not. Only Admin's have the authority to manipulate Movies data
+
+![user](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/fb003555-f86a-4879-807c-8f50cd8a5d45)
 
 
 ## Getting Started: 🚀
