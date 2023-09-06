@@ -41,7 +41,7 @@ Admins can perform CRUD (Create, Read, Update, Delete) operations on movie entri
 ### IMDB_score Table
 ![IMDB_score](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/3c834375-4bde-4274-86a2-862ce5a5a78a)
 
-### Diretor Table
+### Director Table
 ![Director](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/0564aed4-ffb5-469d-b096-37be9b87d84e)
 
 ### Movie_Genre Table
