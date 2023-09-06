@@ -46,8 +46,9 @@ Normalized Movies Table to remove data duplication. Created separate one to many
 ### Director Table
 ![Director](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/0564aed4-ffb5-469d-b096-37be9b87d84e)
 
-Storing genre information directly in the movies table was causing data duplication and inefficiency.To resolve this issue, created Many to Many relationship with movies and genre and mapped their id's to respective table id's. 
 ### Movie_Genre Table
+Storing genre information directly in the movies table was causing data duplication and inefficiency.To resolve this issue, created Many to Many relationship with movies and genre and mapped their id's to respective table id's. 
+
 ![Movie_genre](https://github.com/divyanshkumarworks/IMDB_API/assets/134360630/088e8b14-d49e-439a-adb5-9f3e9e6a159c)
 
 ### User Table
